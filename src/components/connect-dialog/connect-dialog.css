@@ -1,4 +1,4 @@
-.wrapper {
+.connect-dialog .wrapper {
   position: fixed;
   top: 0;
   right: 0;
@@ -11,17 +11,17 @@
   transition: all 0.3s ease-in-out;
 }
 
-.wrapper.bg {
+.connect-dialog .wrapper.bg {
   background-color: #686f82;
   opacity: 0.4;
 }
 
-.wrapper.closed {
+.connect-dialog .wrapper.closed {
   opacity: 0;
   visibility: hidden;
 }
 
-.dialog {
+.connect-dialog .dialog {
   display: flex;
   flex-direction: column;
   margin: 0 !important;

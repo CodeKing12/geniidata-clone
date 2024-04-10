@@ -1,3 +1,4 @@
+import { useState } from "react";
 import logo from "../../assets/images/logo.png";
 import "./navbar.css";
 import "./responsive.css";
@@ -14,10 +15,80 @@ function NavItem(props: NavItemProps) {
   );
 }
 
+function MenuItem(props: NavItemProps) {
+  return (
+    <a className="menu-item">
+      <span className="text">{props.text}</span>
+    </a>
+  );
+}
+
+interface MenuControlToggleProps {
+  text: string;
+  onUpdate?: (newVal: boolean) => void;
+}
+
+function MenuControlToggle({ text, onUpdate }: MenuControlToggleProps) {
+  const [value, setValue] = useState(false);
+
+  function handleSwitch() {
+    setValue(!value);
+    onUpdate?.(!value);
+  }
+
+  return (
+    <a className="menu-item">
+      <span className="text">{text}</span>
+      <label
+        className={`switch ${value ? "on" : "off"}`}
+        onClick={handleSwitch}
+      ></label>
+    </a>
+  );
+}
+
+interface SideNavProps {
+  open: boolean;
+}
+
+function SideNav({ open }: SideNavProps) {
+  return (
+    <aside
+      className="sidenav"
+      style={{
+        display: open ? "" : "none",
+      }}
+    >
+      <div className="wrapper">
+        <div className="menu-links">
+          <MenuItem text="Discover" />
+          <MenuItem text="Profile" />
+          <MenuItem text="Inscriptions" />
+          <MenuItem text="Index" />
+          <MenuItem text="Mint" />
+          <MenuItem text="Rewards" />
+          <MenuItem text="About" />
+          <MenuItem text="Documentation" />
+        </div>
+
+        <MenuControlToggle text="Dark Mode" />
+        <MenuItem text="Install Our App" />
+      </div>
+    </aside>
+  );
+}
+
 export default function Navbar() {
+  const [openMenu, setOpenMenu] = useState(false);
+
   return (
     <nav className="">
-      <div className="get-app">
+      <div
+        className="get-app"
+        style={{
+          display: openMenu ? "none" : "",
+        }}
+      >
         <div className="content">
           <button className="btn-close-banner">
             <i className="iconfont icon-close"></i>
@@ -53,7 +124,12 @@ export default function Navbar() {
           <NavItem text="Index" />
           <NavItem text="Mint" />
         </div>
-        <div className="extra-links">
+        <div
+          className="extra-links"
+          style={{
+            display: openMenu ? "none" : "",
+          }}
+        >
           <div className="gas-fee">
             <i className="iconfont icon-gas1"></i>
             <span>29</span>
@@ -74,10 +150,23 @@ export default function Navbar() {
             &nbsp;Connect
           </button>
 
-          <button className="small-menu">
-            <i className="iconfont icon-view-list icon-click"></i>
+          <button className="small-menu" onClick={() => setOpenMenu(!openMenu)}>
+            <i
+              className="iconfont icon-view-list icon-click"
+              style={{
+                display: openMenu ? "none" : "",
+              }}
+            ></i>
+            <i
+              className="iconfont icon-close icon-click"
+              style={{
+                display: openMenu ? "" : "none",
+              }}
+            ></i>
           </button>
         </div>
+
+        <SideNav open={openMenu} />
       </div>
     </nav>
   );

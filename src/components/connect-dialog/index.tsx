@@ -42,7 +42,7 @@ export default function ConnectWallet({
   closeModal,
 }: ConnectWalletProps) {
   return (
-    <section className={open ? "" : ""}>
+    <section className={`connect-dialog ${open ? "" : ""}`}>
       <aside className={`wrapper bg ${open ? "opened" : "closed"}`}></aside>
       <aside
         className={`wrapper ${open ? "opened" : "closed"}`}

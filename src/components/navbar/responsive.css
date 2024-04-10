@@ -39,4 +39,9 @@
   .small-menu {
     display: block;
   }
+
+  aside.sidenav {
+    opacity: 1;
+    visibility: visible;
+  }
 }

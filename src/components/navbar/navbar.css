@@ -249,8 +249,11 @@ form.search .icon-wrapper.close:hover {
 }
 
 .small-menu i {
-  /* color: #fff; */
   font-size: 24px;
+}
+
+.small-menu:focus i {
+  color: #fff;
 }
 
 .icon-wrapper.close {
@@ -259,4 +262,49 @@ form.search .icon-wrapper.close:hover {
 
 form.search:focus-within .icon-wrapper.close {
   opacity: 1 !important;
+}
+
+aside.sidenav {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 56px;
+  bottom: 0;
+  width: 100%;
+  height: calc(100% - 56px);
+  display: block;
+  background: var(--bg);
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.sidenav .wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  max-height: calc(100% - 150px);
+  /* overflow-y: auto; */
+}
+
+.sidenav .menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 0;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 56px;
+  line-height: 56px;
+  color: var(--font-main-color);
+  text-transform: uppercase;
+}
+
+.sidenav .menu-item:hover .text,
+.sidenav .menu-item:focus .text {
+  background: var(--menu-color-active-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
