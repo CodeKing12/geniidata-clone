@@ -1,0 +1,262 @@
+:root {
+  --menu-color-active-gradient: linear-gradient(270deg, #477fff, #78ffe8);
+}
+
+.get-app {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  padding: 0 16px;
+  background: #792a05;
+  font-size: 12px;
+  color: var(--white);
+}
+
+.get-app .content {
+  display: flex;
+  align-items: center;
+}
+
+.get-app .btn-close-banner {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.get-app .btn-close-banner i {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.get-app .install-link {
+  color: #4c94f3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+nav .main-nav {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid var(--bg-3);
+  font-size: 14px;
+}
+
+nav .logo-container {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  height: 64px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+}
+
+nav .logo-container img {
+  width: 136px;
+  height: 32px;
+}
+
+form.search .fees {
+  display: none;
+  padding: 8px 0;
+}
+
+form.search .fees .gas-fee-item {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white-a55);
+  line-height: 22px;
+}
+
+form.search .wrapper {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #42485a;
+  background-color: var(--bg-3);
+  display: flex;
+  align-items: center;
+  position: relative;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+form.search {
+  content: "";
+  border-radius: 6px;
+  flex: 1;
+  max-width: 625px;
+  height: 40px;
+  background-color: linear-gradient(315deg, #477fff, #78ffe8);
+}
+
+form.search input {
+  flex-grow: 1;
+  color: var(--font-main-color);
+  height: 100%;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-color: transparent;
+}
+
+form.search .icon-wrapper {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
+}
+
+form.search .icon {
+  font-size: var(--icon-size);
+}
+
+form.search .icon.icon-search {
+  background: var(--menu-color-active-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: white;
+}
+
+form.search .icon-wrapper.search {
+  margin-left: 3px;
+}
+
+form.search .icon-wrapper.search::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #2777f0 linear-gradient(298deg, #477fff, #78ffe8);
+  filter: blur(5px);
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav-links {
+  /* flex: 1; */
+  display: flex;
+  align-items: center;
+  padding-right: 28px;
+}
+
+form.search .icon-wrapper.close {
+  color: var(--white-a55);
+}
+
+form.search .icon-wrapper.close:hover {
+  color: hsla(0, 0%, 100%, 1) !important;
+}
+
+.nav-item {
+  cursor: pointer;
+  height: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--font-main-color);
+  line-height: 24px;
+  margin-left: 24px;
+  text-transform: uppercase;
+}
+
+.nav-item:hover .text {
+  background: var(--menu-color-active-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.extra-links {
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.gas-fee {
+  color: #fff;
+  background: var(--color-brand);
+  border-radius: 16px;
+  height: 32px;
+  padding: 0 12px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.gas-fee i {
+  font-size: 24px;
+  margin-right: 4px;
+}
+
+.gift-wrapper-icon-parent {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  line-height: 32px;
+  cursor: pointer;
+}
+
+.gift-wrapper-icon-parent i {
+  background: var(--menu-color-active-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 32px;
+  color: #fff;
+}
+
+.more-items i {
+  margin-right: 22px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-end {
+  display: flex;
+  align-items: center;
+}
+
+.nav-end button.connect-wallet {
+  margin-right: 16px;
+}
+
+.nav-end button.connect-wallet i {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+.small-menu {
+  margin-right: 16px;
+  cursor: pointer;
+  display: none;
+}
+
+.small-menu i {
+  /* color: #fff; */
+  font-size: 24px;
+}
+
+.icon-wrapper.close {
+  opacity: 0;
+}
+
+form.search:focus-within .icon-wrapper.close {
+  opacity: 1 !important;
+}
