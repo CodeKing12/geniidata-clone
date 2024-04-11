@@ -5,16 +5,18 @@ import LeatherLogo from "../../assets/images/leather.png";
 import BitgetLogo from "../../assets/images/bitget.png";
 import WizzLogo from "../../assets/images/wizz.png";
 import "./connect-dialog.css";
+import { useState } from "react";
 
 interface WalletItemProps {
   loading: boolean;
   image: string;
   title: string;
+  handleClick: () => void;
 }
 
-function WalletItem({ title, image, loading }: WalletItemProps) {
+function WalletItem({ title, image, loading, handleClick }: WalletItemProps) {
   return (
-    <div className="wallet-item">
+    <button className="wallet-item" onClick={handleClick}>
       <div className="content">
         <img className="logo" src={image} />
         <span className="title">{title}</span>
@@ -23,12 +25,17 @@ function WalletItem({ title, image, loading }: WalletItemProps) {
         <i
           className="el-icon-loading"
           style={{
-            display: loading ? "none" : "auto",
+            display: loading ? "" : "none",
           }}
         ></i>
-        <i className="iconfont icon-arrow-right"></i>
+        <i
+          className="iconfont icon-arrow-right"
+          style={{
+            display: loading ? "none" : "",
+          }}
+        ></i>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -41,6 +48,16 @@ export default function ConnectWallet({
   open,
   closeModal,
 }: ConnectWalletProps) {
+  const [loadingWallets, setLoadingWallets] = useState<string[]>([]);
+
+  function handleLoadingWallets(id: string) {
+    if (loadingWallets.includes(id)) {
+      setLoadingWallets((prev) => prev.filter((walletID) => walletID !== id));
+    } else {
+      setLoadingWallets((prev) => [...prev, id]);
+    }
+  }
+
   return (
     <section className={`connect-dialog ${open ? "" : ""}`}>
       <aside className={`wrapper bg ${open ? "opened" : "closed"}`}></aside>
@@ -62,28 +79,15 @@ export default function ConnectWallet({
                 Please select the connection method.
               </p>
               <div className="wallet-list">
-                <WalletItem title="Unisat" image={UnisatLogo} loading={false} />
-                <WalletItem title="Xverse" image={XverseLogo} loading={false} />
-                <WalletItem
-                  title="OKX Wallet"
-                  image={OkxLogo}
-                  loading={false}
-                />
-                <WalletItem
-                  title="Leather Wallet"
-                  image={LeatherLogo}
-                  loading={false}
-                />
-                <WalletItem
-                  title="Bitget Wallet"
-                  image={BitgetLogo}
-                  loading={false}
-                />
-                <WalletItem
-                  title="Wizz Wallet"
-                  image={WizzLogo}
-                  loading={false}
-                />
+                {wallets.map((wallet, index) => (
+                  <WalletItem
+                    key={index}
+                    title={wallet.title}
+                    image={wallet.image}
+                    loading={loadingWallets.includes(wallet.id)}
+                    handleClick={() => handleLoadingWallets(wallet.id)}
+                  />
+                ))}
               </div>
             </div>
           </section>
@@ -100,3 +104,37 @@ export default function ConnectWallet({
     </section>
   );
 }
+
+// List of wallets to loop through
+const wallets = [
+  {
+    id: "unisat",
+    title: "Unisat",
+    image: UnisatLogo,
+  },
+  {
+    id: "xverse",
+    title: "Xverse",
+    image: XverseLogo,
+  },
+  {
+    id: "okx",
+    title: "OKX Wallet",
+    image: OkxLogo,
+  },
+  {
+    id: "leather",
+    title: "Leather Wallet",
+    image: LeatherLogo,
+  },
+  {
+    id: "bitget",
+    title: "Bitget Wallet",
+    image: BitgetLogo,
+  },
+  {
+    id: "wizz",
+    title: "Wizz Wallet",
+    image: WizzLogo,
+  },
+];
