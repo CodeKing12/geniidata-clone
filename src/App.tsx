@@ -8,7 +8,7 @@ function App() {
   const [openWallet, setOpenWallet] = useState(false);
 
   return (
-    <main className="wrapper">
+    <main className="wrapper dark-theme">
       <Navbar openWalletCallback={() => setOpenWallet(true)} />
       <Header openWalletCallback={() => setOpenWallet(true)} />
       <ConnectWallet

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../../assets/images/logo.png";
+import { usePopper } from "react-popper";
 import "./navbar.css";
 import "./responsive.css";
 
@@ -23,13 +24,127 @@ function MenuItem(props: NavItemProps) {
   );
 }
 
-interface MenuControlToggleProps {
-  text: string;
+function GasPopover() {
+  const [visible, setVisible] = useState(false);
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const [arrowElement, setArrowElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
+  });
+
+  return (
+    <>
+      <button
+        className="pill"
+        ref={setReferenceElement}
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+      >
+        <i className="iconfont icon-gas1"></i>
+        <span>29</span>
+      </button>
+      <div
+        className={`gas-popover popover ${visible ? "is-visible" : "hidden"}`}
+        style={styles.popper}
+        ref={setPopperElement}
+        {...attributes.popper}
+      >
+        <div className="arrow" style={styles.arrow} ref={setArrowElement}></div>
+        <div className="popover-content">
+          <div className="gas-list">
+            <div className="gas-item">
+              <i className="nav-rate-icon iconfont icon-bike"></i>
+              <span className="nav-rate-text">Low: 39 sats/vB</span>
+            </div>
+            <div className="gas-item">
+              <i className="nav-rate-icon iconfont icon-plane1"></i>
+              <span className="nav-rate-text">Medium: 43 sats/vB</span>
+            </div>
+            <div className="gas-item">
+              <i className="nav-rate-icon iconfont icon-flashlight-line"></i>
+              <span className="nav-rate-text">High: 55 sats/vB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+interface ExtraItemProps {
+  title: string;
+  icon: string;
+}
+
+function ExtraItem({ title, icon }: ExtraItemProps) {
+  return (
+    <div className="additional-item">
+      <i className={`iconfont gn-icon-click ${icon}`}></i>
+      <span>{title}</span>
+    </div>
+  );
+}
+
+function EllipsisPopover() {
+  const [visible, setVisible] = useState(false);
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement);
+
+  function onNightToggle() {}
+
+  return (
+    <>
+      <button
+        className="more-btn"
+        ref={setReferenceElement}
+        onClick={() => setVisible(!visible)}
+        onBlur={() => setVisible(false)}
+      >
+        <i className="iconfont icon-more"></i>
+      </button>
+      <div
+        className={`more-popover popover ${visible ? "is-visible" : "hidden"}`}
+        style={styles.popper}
+        ref={setPopperElement}
+        {...attributes.popper}
+      >
+        <div className="popover-content">
+          <div>
+            <div className="night-mode">
+              <i className="iconfont gn-icon-click icon-dark"></i>
+              <span>Night Mode</span>
+              <SwitchButton
+                className="toggle"
+                onUpdate={onNightToggle}
+                defaultVal={true}
+              />
+            </div>
+            <ExtraItem title="About" icon="icon-info-circle-filled" />
+            <ExtraItem title="API" icon="icon-soundmian" />
+            <ExtraItem title="Twitter" icon="icon-twitter1" />
+            <ExtraItem title="Discord" icon="icon-discord-fill" />
+            <ExtraItem title="Documentation" icon="icon-book-filled" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+interface SwitchButtonProps {
+  className?: string;
+  defaultVal?: boolean;
   onUpdate?: (newVal: boolean) => void;
 }
 
-function MenuControlToggle({ text, onUpdate }: MenuControlToggleProps) {
-  const [value, setValue] = useState(false);
+interface MenuControlToggleProps extends SwitchButtonProps {
+  text: string;
+}
+
+function SwitchButton({ className, defaultVal, onUpdate }: SwitchButtonProps) {
+  const [value, setValue] = useState(!!defaultVal);
 
   function handleSwitch() {
     setValue(!value);
@@ -37,12 +152,18 @@ function MenuControlToggle({ text, onUpdate }: MenuControlToggleProps) {
   }
 
   return (
+    <label
+      className={`switch ${className} ${value ? "on" : "off"}`}
+      onClick={handleSwitch}
+    ></label>
+  );
+}
+
+function MenuControlToggle({ text, onUpdate }: MenuControlToggleProps) {
+  return (
     <a className="menu-item">
       <span className="text">{text}</span>
-      <label
-        className={`switch ${value ? "on" : "off"}`}
-        onClick={handleSwitch}
-      ></label>
+      <SwitchButton onUpdate={onUpdate} />
     </a>
   );
 }
@@ -135,10 +256,7 @@ export default function Navbar({ openWalletCallback }: NavbarProps) {
           }}
         >
           <div className="gas-fee">
-            <div className="pill">
-              <i className="iconfont icon-gas1"></i>
-              <span>29</span>
-            </div>
+            <GasPopover />
           </div>
 
           <div className="gift-wrapper-icon-parent">
@@ -146,7 +264,7 @@ export default function Navbar({ openWalletCallback }: NavbarProps) {
           </div>
 
           <div className="more-items">
-            <i className="iconfont icon-more"></i>
+            <EllipsisPopover />
           </div>
         </div>
 

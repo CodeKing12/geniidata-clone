@@ -80,7 +80,7 @@ form.search .fees .gas-fee-item {
 form.search .wrapper {
   width: 100%;
   height: 100%;
-  border: 2px solid #42485a;
+  border: 2px solid var(--neutral-8);
   background-color: var(--bg-3);
   display: flex;
   align-items: center;
@@ -221,7 +221,8 @@ form.search .icon-wrapper.close:hover {
   color: #fff;
 }
 
-.more-items i {
+.more-btn i {
+  color: var(--font-main-color);
   margin-right: 22px;
   font-size: 20px;
   font-weight: 600;
@@ -258,10 +259,12 @@ form.search .icon-wrapper.close:hover {
 
 .icon-wrapper.close {
   opacity: 0;
+  visibility: hidden;
 }
 
 form.search:focus-within .icon-wrapper.close {
   opacity: 1 !important;
+  visibility: visible;
 }
 
 aside.sidenav {
@@ -307,4 +310,96 @@ aside.sidenav {
   background: var(--menu-color-active-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.gas-popover,
+.more-popover {
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.more-popover {
+  transition-duration: 0.35s;
+}
+
+.gas-popover .gas-list {
+  margin-right: 24px;
+}
+
+.gas-popover .gas-list .gas-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.gas-popover .gas-list .gas-item .nav-rate-icon {
+  font-size: 24px;
+  margin-right: 8px;
+  background: var(--rate-icon-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gas-popover .gas-list .gas-item .nav-rate-text {
+  font-weight: 700;
+  line-height: 22px;
+  color: var(--font-main-color);
+}
+
+.gas-popover.is-visible,
+.more-popover.is-visible {
+  opacity: 1;
+  z-index: 150;
+}
+
+.more-popover .night-mode {
+  display: flex;
+  align-items: center;
+  cursor: unset;
+  position: relative;
+  padding: 9px 8px;
+  padding-bottom: 16px;
+  border-radius: 6px;
+  color: var(--font-main-color);
+}
+
+.more-popover .additional-item {
+  display: flex;
+  align-items: center;
+  padding: 9px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--font-main-color);
+}
+
+.more-popover .additional-item:hover {
+  background-color: var(--bg-4);
+}
+
+.more-popover .night-mode i:hover,
+.more-popover .additional-item i:hover {
+  color: var(--font-main-color);
+}
+
+.more-popover .night-mode i,
+.more-popover .additional-item i {
+  margin-right: 8px;
+}
+
+.more-popover .gn-icon-click {
+  color: var(--white-a55);
+}
+
+.more-popover .night-mode .toggle {
+  margin-left: 16px;
+}
+
+.more-popover .night-mode::after {
+  position: absolute;
+  height: 2px;
+  background-color: var(--neutral-8);
+  bottom: 4px;
+  right: 0;
+  left: 0;
+  content: " ";
 }
