@@ -25,6 +25,7 @@ section .container-2 {
 
 .poster {
   min-height: 45%;
+  height: 45%;
   padding: 2px 2px 0;
 }
 

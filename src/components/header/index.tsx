@@ -1,3 +1,4 @@
+import HeaderBGImg from "../../assets/images/header-bg.png";
 import "./header.css";
 
 interface HeaderProps {
@@ -10,7 +11,7 @@ export default function Header({ openWalletCallback }: HeaderProps) {
       <div className="container">
         <div className="container-2">
           <div className="poster">
-            <img />
+            <img src={HeaderBGImg} />
           </div>
           <div className="content">
             <h1 className="gn-h1">
