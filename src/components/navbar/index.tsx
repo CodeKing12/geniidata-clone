@@ -78,7 +78,11 @@ function SideNav({ open }: SideNavProps) {
   );
 }
 
-export default function Navbar() {
+interface NavbarProps {
+  openWalletCallback: () => void;
+}
+
+export default function Navbar({ openWalletCallback }: NavbarProps) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -145,7 +149,10 @@ export default function Navbar() {
         </div>
 
         <div className="nav-end">
-          <button className="connect-wallet gn-button gn-button--medium gn-button--primary">
+          <button
+            className="connect-wallet gn-button gn-button--medium gn-button--primary"
+            onClick={openWalletCallback}
+          >
             <i className="iconfont icon-wallet"></i>
             &nbsp;Connect
           </button>

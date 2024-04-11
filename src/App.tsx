@@ -9,8 +9,8 @@ function App() {
 
   return (
     <main className="wrapper">
-      <Navbar />
-      <Header connectCallback={() => setOpenWallet(true)} />
+      <Navbar openWalletCallback={() => setOpenWallet(true)} />
+      <Header openWalletCallback={() => setOpenWallet(true)} />
       <ConnectWallet
         open={openWallet}
         closeModal={() => setOpenWallet(false)}

@@ -1,10 +1,10 @@
 import "./header.css";
 
 interface HeaderProps {
-  connectCallback: () => void;
+  openWalletCallback: () => void;
 }
 
-export default function Header({ connectCallback }: HeaderProps) {
+export default function Header({ openWalletCallback }: HeaderProps) {
   return (
     <section className="parent">
       <div className="container">
@@ -18,7 +18,7 @@ export default function Header({ connectCallback }: HeaderProps) {
             </h1>
             <button
               className="gn-button gn-button--primary gn-button--medium connect-btn"
-              onClick={connectCallback}
+              onClick={openWalletCallback}
             >
               <i className="iconfont icon-wallet"></i>
               &nbsp;Connect Wallet
