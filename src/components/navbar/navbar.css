@@ -149,7 +149,7 @@ form.search .icon-wrapper.search::after {
 }
 
 .nav-links {
-  /* flex: 1; */
+  flex: 1;
   display: flex;
   align-items: center;
   padding-right: 28px;
