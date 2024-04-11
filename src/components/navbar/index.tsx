@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { usePopper } from "react-popper";
 import "./navbar.css";
@@ -26,18 +26,24 @@ function MenuItem(props: NavItemProps) {
 
 function GasPopover() {
   const [visible, setVisible] = useState(false);
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
-  const [arrowElement, setArrowElement] = useState(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
-  });
+  const referenceElement = useRef(null);
+  const popperElement = useRef(null);
+  const arrowElement = useRef(null);
+  const { styles, attributes } = usePopper(
+    referenceElement.current,
+    popperElement.current,
+    {
+      modifiers: [
+        { name: "arrow", options: { element: arrowElement.current } },
+      ],
+    }
+  );
 
   return (
     <>
       <button
         className="pill"
-        ref={setReferenceElement}
+        ref={referenceElement}
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
       >
@@ -47,10 +53,10 @@ function GasPopover() {
       <div
         className={`gas-popover popover ${visible ? "is-visible" : "hidden"}`}
         style={styles.popper}
-        ref={setPopperElement}
+        ref={popperElement}
         {...attributes.popper}
       >
-        <div className="arrow" style={styles.arrow} ref={setArrowElement}></div>
+        <div className="arrow" style={styles.arrow} ref={arrowElement}></div>
         <div className="popover-content">
           <div className="gas-list">
             <div className="gas-item">
@@ -74,17 +80,23 @@ function GasPopover() {
 
 function RewardsPopover() {
   const [visible, setVisible] = useState(false);
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
-  const [arrowElement, setArrowElement] = useState(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
-  });
+  const referenceElement = useRef(null);
+  const popperElement = useRef(null);
+  const arrowElement = useRef(null);
+  const { styles, attributes } = usePopper(
+    referenceElement.current,
+    popperElement.current,
+    {
+      modifiers: [
+        { name: "arrow", options: { element: arrowElement.current } },
+      ],
+    }
+  );
 
   return (
     <>
       <div
-        ref={setReferenceElement}
+        ref={referenceElement}
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
       >
@@ -93,10 +105,10 @@ function RewardsPopover() {
       <div
         className={`rewards-popover popover ${visible ? "is-visible" : "hidden"}`}
         style={styles.popper}
-        ref={setPopperElement}
+        ref={popperElement}
         {...attributes.popper}
       >
-        <div className="arrow" style={styles.arrow} ref={setArrowElement}></div>
+        <div className="arrow" style={styles.arrow} ref={arrowElement}></div>
         <span className="popover-content">Rewards</span>
       </div>
     </>
@@ -119,9 +131,12 @@ function ExtraItem({ title, icon }: ExtraItemProps) {
 
 function EllipsisPopover() {
   const [visible, setVisible] = useState(false);
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement);
+  const referenceElement = useRef(null);
+  const popperElement = useRef(null);
+  const { styles, attributes } = usePopper(
+    referenceElement.current,
+    popperElement.current
+  );
 
   function onNightToggle() {}
 
@@ -129,7 +144,7 @@ function EllipsisPopover() {
     <>
       <button
         className="more-btn"
-        ref={setReferenceElement}
+        ref={referenceElement}
         onClick={() => setVisible(!visible)}
         onBlur={() => setVisible(false)}
       >
@@ -138,7 +153,7 @@ function EllipsisPopover() {
       <div
         className={`more-popover popover ${visible ? "is-visible" : "hidden"}`}
         style={styles.popper}
-        ref={setPopperElement}
+        ref={popperElement}
         {...attributes.popper}
       >
         <div className="popover-content">
