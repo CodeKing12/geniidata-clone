@@ -186,6 +186,11 @@ form.search .icon-wrapper.close:hover {
   padding-left: 16px;
 }
 
+.gas-fee,
+.more-items {
+  position: relative;
+}
+
 .gas-fee .pill {
   color: #fff;
   background: var(--color-brand);
@@ -318,6 +323,7 @@ aside.sidenav {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease-in-out;
+  width: max-content;
 }
 
 .more-popover {
