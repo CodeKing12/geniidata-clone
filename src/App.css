@@ -218,5 +218,5 @@ main.wrapper {
   line-height: 1.4;
   text-align: justify;
   font-size: 14px;
-  word-break: break-all;
+  /* word-break: break-all; */
 }

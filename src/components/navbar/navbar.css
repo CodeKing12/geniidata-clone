@@ -313,8 +313,10 @@ aside.sidenav {
 }
 
 .gas-popover,
-.more-popover {
+.more-popover,
+.rewards-popover {
   opacity: 0;
+  visibility: hidden;
   transition: all 0.3s ease-in-out;
 }
 
@@ -347,9 +349,11 @@ aside.sidenav {
 }
 
 .gas-popover.is-visible,
-.more-popover.is-visible {
+.more-popover.is-visible,
+.rewards-popover.is-visible {
   opacity: 1;
   z-index: 150;
+  visibility: visible;
 }
 
 .more-popover .night-mode {
@@ -402,4 +406,23 @@ aside.sidenav {
   right: 0;
   left: 0;
   content: " ";
+}
+
+.rewards-popover .popover-content {
+  background: var(--bg-4) !important;
+  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--font-main-color);
+  min-width: 50px;
+  padding: 6px 10px;
+}
+
+.popover.rewards-popover .arrow {
+  top: -10px;
+}
+
+.popover.rewards-popover .arrow,
+.popover.rewards-popover .arrow::after {
+  border-bottom-color: #303133 !important;
 }

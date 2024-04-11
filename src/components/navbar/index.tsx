@@ -72,6 +72,37 @@ function GasPopover() {
   );
 }
 
+function RewardsPopover() {
+  const [visible, setVisible] = useState(false);
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const [arrowElement, setArrowElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
+  });
+
+  return (
+    <>
+      <div
+        ref={setReferenceElement}
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+      >
+        <i className="iconfont icon-gift"></i>
+      </div>
+      <div
+        className={`rewards-popover popover ${visible ? "is-visible" : "hidden"}`}
+        style={styles.popper}
+        ref={setPopperElement}
+        {...attributes.popper}
+      >
+        <div className="arrow" style={styles.arrow} ref={setArrowElement}></div>
+        <span className="popover-content">Rewards</span>
+      </div>
+    </>
+  );
+}
+
 interface ExtraItemProps {
   title: string;
   icon: string;
@@ -260,7 +291,7 @@ export default function Navbar({ openWalletCallback }: NavbarProps) {
           </div>
 
           <div className="gift-wrapper-icon-parent">
-            <i className="iconfont icon-gift"></i>
+            <RewardsPopover />
           </div>
 
           <div className="more-items">
