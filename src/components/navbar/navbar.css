@@ -186,7 +186,7 @@ form.search .icon-wrapper.close:hover {
   padding-left: 16px;
 }
 
-.gas-fee {
+.gas-fee .pill {
   color: #fff;
   background: var(--color-brand);
   border-radius: 16px;
@@ -197,7 +197,7 @@ form.search .icon-wrapper.close:hover {
   align-items: center;
 }
 
-.gas-fee i {
+.gas-fee .pill i {
   font-size: 24px;
   margin-right: 4px;
 }

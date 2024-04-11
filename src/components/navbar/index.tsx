@@ -135,8 +135,10 @@ export default function Navbar({ openWalletCallback }: NavbarProps) {
           }}
         >
           <div className="gas-fee">
-            <i className="iconfont icon-gas1"></i>
-            <span>29</span>
+            <div className="pill">
+              <i className="iconfont icon-gas1"></i>
+              <span>29</span>
+            </div>
           </div>
 
           <div className="gift-wrapper-icon-parent">
