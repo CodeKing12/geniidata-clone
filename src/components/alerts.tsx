@@ -24,7 +24,8 @@ export default function Alert({ id, type, message, onRemove }: AlertProps) {
     entering: {
       opacity: 1,
       transform: "translate(-50%, 0)",
-      visibility: "visible",
+      // Declared as const to remove a ts error
+      visibility: "visible" as const,
     },
     entered: {},
     exiting: {},
