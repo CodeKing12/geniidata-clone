@@ -17,7 +17,14 @@ export type WalletDetails = {
 
 function App() {
   const [openWallet, setOpenWallet] = useState(false);
-  const [alerts, setAlerts] = useState<AlertInfo[]>([]);
+  const [alerts, setAlerts] = useState<AlertInfo[]>([
+    // {
+    //   id: 0,
+    //   type: "error",
+    //   message: "Wallet Not Found",
+    // },
+  ]);
+
   const [connectedWallet, setConnectedWallet] = useState<WalletDetails>({
     address: "",
     publicKey: "",
@@ -73,14 +80,17 @@ function App() {
           ])
         }
       />
-      {alerts.map((alert) => (
-        <Alert
-          {...alert}
-          onRemove={(id) =>
-            setAlerts((prev) => prev.filter((alert) => alert.id !== id))
-          }
-        />
-      ))}
+      <div className="page-alerts">
+        {alerts.map((alert) => (
+          <Alert
+            key={alert.id}
+            {...alert}
+            onRemove={(id) =>
+              setAlerts((prev) => prev.filter((alert) => alert.id !== id))
+            }
+          />
+        ))}
+      </div>
     </main>
   );
 }

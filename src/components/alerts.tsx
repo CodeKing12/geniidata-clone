@@ -21,13 +21,13 @@ export default function Alert({ id, type, message, onRemove }: AlertProps) {
   const [transitionState, setTransitionState] = useState(false);
 
   const transitions = {
-    entering: {
+    entering: {},
+    entered: {
       opacity: 1,
-      transform: "translate(-50%, 0)",
+      transform: "translateY(0)",
       // Declared as const to remove a ts error
       visibility: "visible" as const,
     },
-    entered: {},
     exiting: {},
     exited: {},
     unmounted: {},
@@ -51,7 +51,7 @@ export default function Alert({ id, type, message, onRemove }: AlertProps) {
   return (
     <Transition
       in={transitionState}
-      timeout={3000}
+      timeout={400}
       onEntered={autoRemove}
       onExited={() => onRemove(id)}
     >

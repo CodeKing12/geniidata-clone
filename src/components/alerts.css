@@ -1,12 +1,8 @@
 .alert {
-  min-width: 380px;
-  box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid #f3f3f3;
-  position: fixed;
-  left: 50%;
-  top: 20px;
-  /* transform: translate(-50%, 0); */
+  width: 100%;
+  position: relative;
   background-color: #edf2fc;
   /* transition:
     opacity 0.3s,
@@ -19,7 +15,7 @@
   align-items: center;
   z-index: 300;
   opacity: 0;
-  transform: translate(-50%, -12px);
+  transform: translateY(-12px);
   visibility: hidden;
 }
 

@@ -60,6 +60,7 @@ export default function ConnectWallet({
 
   async function handleLoadingWallets(
     id: WalletID,
+    title: string,
     callback: ConnectWalletCallback
   ) {
     if (loadingWallets.includes(id)) {
@@ -85,7 +86,10 @@ export default function ConnectWallet({
           onError("error", "Sign Error");
         }
       } else {
-        onError("error", "Authorization Failed");
+        onError(
+          "error",
+          `${title.replace("Wallet", "").trim()} Wallet Not Found`
+        );
       }
       setLoadingWallets((prev) => prev.filter((walletID) => walletID !== id));
     }
@@ -119,7 +123,11 @@ export default function ConnectWallet({
                     image={wallet.image}
                     loading={loadingWallets.includes(wallet.id)}
                     handleClick={() =>
-                      handleLoadingWallets(wallet.id, wallet.callback)
+                      handleLoadingWallets(
+                        wallet.id,
+                        wallet.title,
+                        wallet.callback
+                      )
                     }
                   />
                 ))}
