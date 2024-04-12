@@ -87,7 +87,6 @@ export default function ConnectWallet({
       } else {
         onError("error", "Authorization Failed");
       }
-      console.log("Removing filter", id, loadingWallets);
       setLoadingWallets((prev) => prev.filter((walletID) => walletID !== id));
     }
   }

@@ -16,7 +16,7 @@ export type SignWalletParams = (
   publicKey: string
 ) => SignWalletReturnObj;
 
-const message = "I authorize connecting my wallet to GeniiData";
+const message = "I authorize connecting my wallet to Pivot Solutions";
 // Nonce: XRMWYP6KJ2JB5PXZ1KUNZYN4YBQOJ4
 
 export type WalletConnectParams = (
@@ -92,7 +92,6 @@ export const signOkxWallet: SignWalletParams = async (address, _publicKey) => {
     signature = await window.okxwallet.bitcoin.signMessage(message, {
       from: address,
     });
-    console.log("No Error: ", signature);
     return {
       type: "success",
       signature,

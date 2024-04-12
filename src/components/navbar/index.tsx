@@ -185,10 +185,11 @@ function EllipsisPopover() {
 }
 
 interface AddressPopoverProps {
+  address: string;
   disconnectWallet: () => void;
 }
 
-function AddressPopover({ disconnectWallet }: AddressPopoverProps) {
+function AddressPopover({ address, disconnectWallet }: AddressPopoverProps) {
   const [visible, setVisible] = useState(false);
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
@@ -206,7 +207,7 @@ function AddressPopover({ disconnectWallet }: AddressPopoverProps) {
         onBlur={() => setVisible(false)}
       >
         <div className="wrapper">
-          <span>bc1q...lxgq</span>
+          <span>{address.slice(0, 4) + "..." + address.slice(-4)}</span>
           <i
             className="addr-arrow-icon iconfont icon-chevron-down"
             style={{
@@ -387,7 +388,10 @@ export default function Navbar({
         <div className="nav-end">
           {wallet.address.length > 0 ? (
             <div className="address-dropdown">
-              <AddressPopover disconnectWallet={handleDisconnectWallet} />
+              <AddressPopover
+                address={wallet.address}
+                disconnectWallet={handleDisconnectWallet}
+              />
             </div>
           ) : (
             <button
