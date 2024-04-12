@@ -27,3 +27,7 @@
 .el-icon-loading:before {
   content: "\e6cf";
 }
+
+.el-icon-error:before {
+  content: "\e79d";
+}

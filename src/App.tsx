@@ -6,6 +6,7 @@ import ConnectWallet, {
 } from "./components/connect-dialog";
 import { useState } from "react";
 import { WalletID } from "./components/connect-dialog/connectWallets";
+import Alert, { AlertInfo } from "./components/alerts";
 
 export type WalletDetails = {
   id?: WalletID;
@@ -16,6 +17,7 @@ export type WalletDetails = {
 
 function App() {
   const [openWallet, setOpenWallet] = useState(false);
+  const [alerts, setAlerts] = useState<AlertInfo[]>([]);
   const [connectedWallet, setConnectedWallet] = useState<WalletDetails>({
     address: "",
     publicKey: "",
@@ -60,7 +62,25 @@ function App() {
         open={openWallet}
         closeModal={() => setOpenWallet(false)}
         onWalletConnect={handleConnectWallet}
+        onError={(type, message) =>
+          setAlerts((prev) => [
+            ...prev,
+            {
+              id: prev.length,
+              type,
+              message,
+            },
+          ])
+        }
       />
+      {alerts.map((alert) => (
+        <Alert
+          {...alert}
+          onRemove={(id) =>
+            setAlerts((prev) => prev.filter((alert) => alert.id !== id))
+          }
+        />
+      ))}
     </main>
   );
 }

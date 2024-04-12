@@ -2,6 +2,7 @@ import "./connect-dialog.css";
 import { useState } from "react";
 import { ConnectWalletCallback, WalletID, wallets } from "./connectWallets";
 import { handleSignMessage } from "./signWallets";
+import { AlertType } from "../alerts";
 
 interface WalletItemProps {
   loading: boolean;
@@ -45,6 +46,7 @@ export type ConnectedWalletParams = (
 interface ConnectWalletProps {
   open: boolean;
   closeModal: () => void;
+  onError: (type: AlertType, message: string) => void;
   onWalletConnect: ConnectedWalletParams;
 }
 
@@ -52,6 +54,7 @@ export default function ConnectWallet({
   open,
   closeModal,
   onWalletConnect,
+  onError,
 }: ConnectWalletProps) {
   const [loadingWallets, setLoadingWallets] = useState<string[]>([]);
 
@@ -79,7 +82,10 @@ export default function ConnectWallet({
           );
         } else {
           console.log("Sign Error");
+          onError("error", "Sign Error");
         }
+      } else {
+        onError("error", "Authorization Failed");
       }
       console.log("Removing filter", id, loadingWallets);
       setLoadingWallets((prev) => prev.filter((walletID) => walletID !== id));

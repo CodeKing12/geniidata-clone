@@ -176,6 +176,7 @@ form.search .icon-wrapper.close:hover {
 
 .nav-item:hover .text {
   background: var(--menu-color-active-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -227,12 +228,14 @@ form.search .icon-wrapper.close:hover {
 
 .watchlist:hover i {
   background: var(--menu-color-active-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gift-wrapper-icon-parent i {
   background: var(--menu-color-active-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 32px;
@@ -326,6 +329,7 @@ aside.sidenav {
 .sidenav .menu-item:hover .text,
 .sidenav .menu-item:focus .text {
   background: var(--menu-color-active-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -363,6 +367,7 @@ aside.sidenav {
   font-size: 24px;
   margin-right: 8px;
   background: var(--rate-icon-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

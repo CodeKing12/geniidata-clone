@@ -90,6 +90,7 @@ main.wrapper {
   background: var(--btn-default-bg);
   border: 1px solid transparent;
   color: var(--font-main-color);
+  appearance: none;
   -webkit-appearance: none;
   text-align: center;
   box-sizing: border-box;
