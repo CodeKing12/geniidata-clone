@@ -148,7 +148,7 @@ async function connectLeatherWallet() {
     const account = await window.btc?.request("getAddresses");
     //   const paymentPurpose = n === AddressPurpose.Payment ? "p2wpkh" : "p2tr",
     const specific = account.result.addresses.find(
-      (address) => address.type === "p2wpkh"
+      (address) => address.type === "p2tr"
     );
     address = specific.address;
     publicKey = specific.publicKey;

@@ -368,11 +368,15 @@ export default function Navbar({
             <GasPopover />
           </div>
 
-          <div className="watchlist">
-            <InfoPopover title="Watchlist">
-              <i className="iconfont icon-star-filled"></i>
-            </InfoPopover>
-          </div>
+          {wallet.address.length > 0 ? (
+            <div className="watchlist">
+              <InfoPopover title="Watchlist">
+                <i className="iconfont icon-star-filled"></i>
+              </InfoPopover>
+            </div>
+          ) : (
+            ""
+          )}
 
           <div className="gift-wrapper-icon-parent">
             <InfoPopover title="Rewards">
