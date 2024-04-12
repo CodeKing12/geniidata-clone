@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { PropsWithChildren, useRef, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { usePopper } from "react-popper";
 import "./navbar.css";
 import "./responsive.css";
+import { WalletDetails } from "../../App";
 
 interface NavItemProps {
   text: string;
@@ -78,7 +79,11 @@ function GasPopover() {
   );
 }
 
-function RewardsPopover() {
+interface InfoPopoverProps extends PropsWithChildren {
+  title: string;
+}
+
+function InfoPopover({ title, children }: InfoPopoverProps) {
   const [visible, setVisible] = useState(false);
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
@@ -100,16 +105,16 @@ function RewardsPopover() {
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
       >
-        <i className="iconfont icon-gift"></i>
+        {children}
       </div>
       <div
-        className={`rewards-popover popover ${visible ? "is-visible" : "hidden"}`}
+        className={`info-popover popover ${visible ? "is-visible" : "hidden"}`}
         style={styles.popper}
         ref={popperElement}
         {...attributes.popper}
       >
         <div className="arrow" style={styles.arrow} ref={arrowElement}></div>
-        <span className="popover-content">Rewards</span>
+        <span className="popover-content">{title}</span>
       </div>
     </>
   );
@@ -172,6 +177,57 @@ function EllipsisPopover() {
             <ExtraItem title="Twitter" icon="icon-twitter1" />
             <ExtraItem title="Discord" icon="icon-discord-fill" />
             <ExtraItem title="Documentation" icon="icon-book-filled" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+interface AddressPopoverProps {
+  disconnectWallet: () => void;
+}
+
+function AddressPopover({ disconnectWallet }: AddressPopoverProps) {
+  const [visible, setVisible] = useState(false);
+  const referenceElement = useRef(null);
+  const popperElement = useRef(null);
+  const { styles, attributes } = usePopper(
+    referenceElement.current,
+    popperElement.current
+  );
+
+  return (
+    <>
+      <button
+        className="address-btn"
+        ref={referenceElement}
+        onClick={() => setVisible(!visible)}
+        onBlur={() => setVisible(false)}
+      >
+        <div className="wrapper">
+          <span>bc1q...lxgq</span>
+          <i
+            className="addr-arrow-icon iconfont icon-chevron-down"
+            style={{
+              transform: visible ? "rotate(180deg)" : "rotateY(0)",
+            }}
+          ></i>
+        </div>
+      </button>
+      <div
+        className={`address-popover popover ${visible ? "is-visible" : "hidden"}`}
+        style={styles.popper}
+        ref={popperElement}
+        {...attributes.popper}
+      >
+        <div className="popover-content">
+          <div className="addr-menu-list">
+            <div className="addr-menu-item">Orders</div>
+            <div className="addr-menu-item">Sign In on Mobile</div>
+            <button className="addr-menu-item" onClick={disconnectWallet}>
+              Disconnect
+            </button>
           </div>
         </div>
       </div>
@@ -246,10 +302,16 @@ function SideNav({ open }: SideNavProps) {
 }
 
 interface NavbarProps {
+  wallet: WalletDetails;
   openWalletCallback: () => void;
+  handleDisconnectWallet: () => void;
 }
 
-export default function Navbar({ openWalletCallback }: NavbarProps) {
+export default function Navbar({
+  wallet,
+  openWalletCallback,
+  handleDisconnectWallet,
+}: NavbarProps) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -305,8 +367,16 @@ export default function Navbar({ openWalletCallback }: NavbarProps) {
             <GasPopover />
           </div>
 
+          <div className="watchlist">
+            <InfoPopover title="Watchlist">
+              <i className="iconfont icon-star-filled"></i>
+            </InfoPopover>
+          </div>
+
           <div className="gift-wrapper-icon-parent">
-            <RewardsPopover />
+            <InfoPopover title="Rewards">
+              <i className="iconfont icon-gift"></i>
+            </InfoPopover>
           </div>
 
           <div className="more-items">
@@ -315,13 +385,19 @@ export default function Navbar({ openWalletCallback }: NavbarProps) {
         </div>
 
         <div className="nav-end">
-          <button
-            className="connect-wallet gn-button gn-button--medium gn-button--primary"
-            onClick={openWalletCallback}
-          >
-            <i className="iconfont icon-wallet"></i>
-            &nbsp;Connect
-          </button>
+          {wallet.address.length > 0 ? (
+            <div className="address-dropdown">
+              <AddressPopover disconnectWallet={handleDisconnectWallet} />
+            </div>
+          ) : (
+            <button
+              className="connect-wallet gn-button gn-button--medium gn-button--primary"
+              onClick={openWalletCallback}
+            >
+              <i className="iconfont icon-wallet"></i>
+              &nbsp;Connect
+            </button>
+          )}
 
           <button className="small-menu" onClick={() => setOpenMenu(!openMenu)}>
             <i

@@ -1,11 +1,7 @@
-import UnisatLogo from "../../assets/images/unisat.png";
-import XverseLogo from "../../assets/images/xverse.png";
-import OkxLogo from "../../assets/images/okx.png";
-import LeatherLogo from "../../assets/images/leather.png";
-import BitgetLogo from "../../assets/images/bitget.png";
-import WizzLogo from "../../assets/images/wizz.png";
 import "./connect-dialog.css";
 import { useState } from "react";
+import { ConnectWalletCallback, WalletID, wallets } from "./connectWallets";
+import { handleSignMessage } from "./signWallets";
 
 interface WalletItemProps {
   loading: boolean;
@@ -39,22 +35,54 @@ function WalletItem({ title, image, loading, handleClick }: WalletItemProps) {
   );
 }
 
+export type ConnectedWalletParams = (
+  wallet: WalletID,
+  address: string,
+  publicKey: string,
+  signature: string
+) => void;
+
 interface ConnectWalletProps {
   open: boolean;
   closeModal: () => void;
+  onWalletConnect: ConnectedWalletParams;
 }
 
 export default function ConnectWallet({
   open,
   closeModal,
+  onWalletConnect,
 }: ConnectWalletProps) {
   const [loadingWallets, setLoadingWallets] = useState<string[]>([]);
 
-  function handleLoadingWallets(id: string) {
+  async function handleLoadingWallets(
+    id: WalletID,
+    callback: ConnectWalletCallback
+  ) {
     if (loadingWallets.includes(id)) {
       setLoadingWallets((prev) => prev.filter((walletID) => walletID !== id));
     } else {
       setLoadingWallets((prev) => [...prev, id]);
+      const result = await callback();
+      if (result.type === "success") {
+        const signResponse = await handleSignMessage(
+          id,
+          result.address,
+          result.publicKey
+        );
+        if (signResponse.type === "success") {
+          onWalletConnect(
+            id,
+            result.address,
+            result.publicKey,
+            signResponse.signature
+          );
+        } else {
+          console.log("Sign Error");
+        }
+      }
+      console.log("Removing filter", id, loadingWallets);
+      setLoadingWallets((prev) => prev.filter((walletID) => walletID !== id));
     }
   }
 
@@ -85,7 +113,9 @@ export default function ConnectWallet({
                     title={wallet.title}
                     image={wallet.image}
                     loading={loadingWallets.includes(wallet.id)}
-                    handleClick={() => handleLoadingWallets(wallet.id)}
+                    handleClick={() =>
+                      handleLoadingWallets(wallet.id, wallet.callback)
+                    }
                   />
                 ))}
               </div>
@@ -104,37 +134,3 @@ export default function ConnectWallet({
     </section>
   );
 }
-
-// List of wallets to loop through
-const wallets = [
-  {
-    id: "unisat",
-    title: "Unisat",
-    image: UnisatLogo,
-  },
-  {
-    id: "xverse",
-    title: "Xverse",
-    image: XverseLogo,
-  },
-  {
-    id: "okx",
-    title: "OKX Wallet",
-    image: OkxLogo,
-  },
-  {
-    id: "leather",
-    title: "Leather Wallet",
-    image: LeatherLogo,
-  },
-  {
-    id: "bitget",
-    title: "Bitget Wallet",
-    image: BitgetLogo,
-  },
-  {
-    id: "wizz",
-    title: "Wizz Wallet",
-    image: WizzLogo,
-  },
-];

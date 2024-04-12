@@ -187,7 +187,8 @@ form.search .icon-wrapper.close:hover {
 }
 
 .gas-fee,
-.more-items {
+.more-items,
+.watchlist {
   position: relative;
 }
 
@@ -207,6 +208,7 @@ form.search .icon-wrapper.close:hover {
   margin-right: 4px;
 }
 
+.watchlist,
 .gift-wrapper-icon-parent {
   position: relative;
   display: inline-block;
@@ -216,6 +218,17 @@ form.search .icon-wrapper.close:hover {
   margin-right: 16px;
   line-height: 32px;
   cursor: pointer;
+}
+
+.watchlist i {
+  font-size: 16px;
+  color: var(--font-main-color);
+}
+
+.watchlist:hover i {
+  background: var(--menu-color-active-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .gift-wrapper-icon-parent i {
@@ -319,10 +332,16 @@ aside.sidenav {
 
 .gas-popover,
 .more-popover,
-.rewards-popover {
+.info-popover,
+.address-popover {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease-in-out;
+}
+
+.gas-popover,
+.more-popover,
+.info-popover {
   width: max-content;
 }
 
@@ -356,7 +375,8 @@ aside.sidenav {
 
 .gas-popover.is-visible,
 .more-popover.is-visible,
-.rewards-popover.is-visible {
+.info-popover.is-visible,
+.address-popover.is-visible {
   opacity: 1;
   z-index: 150;
   visibility: visible;
@@ -414,7 +434,7 @@ aside.sidenav {
   content: " ";
 }
 
-.rewards-popover .popover-content {
+.info-popover .popover-content {
   background: var(--bg-4) !important;
   white-space: pre-wrap;
   font-size: 12px;
@@ -424,11 +444,54 @@ aside.sidenav {
   padding: 6px 10px;
 }
 
-.popover.rewards-popover .arrow {
+.popover.info-popover .arrow {
   top: -10px;
 }
 
-.popover.rewards-popover .arrow,
-.popover.rewards-popover .arrow::after {
+.popover.info-popover .arrow,
+.popover.info-popover .arrow::after {
   border-bottom-color: #303133 !important;
+}
+
+.address-dropdown {
+  margin-right: 16px;
+  color: var(--font-main-color);
+}
+
+.address-btn .wrapper {
+  display: inline-flex;
+  height: 32px;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 6px;
+  background: var(--bg-3);
+  padding: 0 16px;
+  border: 1px solid transparent;
+  color: var(--font-main-color);
+}
+
+.address-btn .addr-arrow-icon {
+  margin-left: 8px;
+  transition: all 0.3s;
+}
+
+.address-popover {
+  width: 150px;
+}
+
+.address-popover .addr-menu-list .addr-menu-item {
+  width: 100%;
+  text-align: left;
+  padding: 9px 8px;
+  border-radius: 6px;
+  color: var(--font-main-color);
+  cursor: pointer;
+}
+
+.address-popover .addr-menu-list .addr-menu-item:hover {
+  background-color: var(--bg-4);
+}
+
+.watchlist .popover {
+  margin-top: 6px;
 }
