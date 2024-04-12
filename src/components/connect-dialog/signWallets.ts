@@ -9,6 +9,7 @@ import { signAddress } from "../../general/misc";
 type SignWalletReturnObj = Promise<{
   type: "success" | "error";
   signature: string;
+  message?: string;
 }>;
 
 export type SignWalletParams = (
@@ -40,6 +41,7 @@ export const handleSignMessage: WalletConnectParams = async (
     return {
       type: "error",
       signature: "",
+      message: result?.message,
     };
   }
 };
@@ -130,6 +132,7 @@ export const signLeatherWallet: SignWalletParams = async (
     return {
       type: "error",
       signature,
+      message: error?.message,
     };
   }
 };

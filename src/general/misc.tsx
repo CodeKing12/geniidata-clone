@@ -16,6 +16,7 @@ type SignAddressFn = (
 ) => Promise<{
   type: "success" | "error";
   signature: string;
+  message?: string;
 }>;
 
 export const signAddress: SignAddressFn = async (id, address, publicKey) => {

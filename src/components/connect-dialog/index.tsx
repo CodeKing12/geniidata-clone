@@ -82,8 +82,10 @@ export default function ConnectWallet({
             signResponse.signature
           );
         } else {
-          console.log("Sign Error");
-          onError("error", "Sign Error");
+          // console.log(signResponse.message);
+          if (signResponse.message && signResponse.message?.length) {
+            onError("error", signResponse.message);
+          }
         }
       } else {
         onError(

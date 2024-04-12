@@ -68,7 +68,7 @@ async function connectXverseWallet() {
       purposes: [AddressPurpose.Ordinals, AddressPurpose.Payment],
       message: "Address for receiving Ordinals",
     });
-    console.log("getAccounts ~ response:", response);
+    // console.log("getAccounts ~ response:", response);
 
     if (response.status === "success") {
       const ordinalsAddressItem = response.result.find(
