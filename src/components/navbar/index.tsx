@@ -1,9 +1,10 @@
-import { PropsWithChildren, useRef, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { usePopper } from "react-popper";
 import "./navbar.css";
 import "./responsive.css";
 import { WalletDetails } from "../../App";
+import { getRateFees } from "../../general/misc";
 
 interface NavItemProps {
   text: string;
@@ -25,7 +26,7 @@ function MenuItem(props: NavItemProps) {
   );
 }
 
-function GasPopover() {
+function GasPopover({ halfHourFee }: { halfHourFee?: number }) {
   const [visible, setVisible] = useState(false);
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
@@ -49,7 +50,7 @@ function GasPopover() {
         onMouseLeave={() => setVisible(false)}
       >
         <i className="iconfont icon-gas1"></i>
-        <span>29</span>
+        <span>{halfHourFee || ""}</span>
       </button>
       <div
         className={`gas-popover popover ${visible ? "is-visible" : "hidden"}`}
@@ -308,12 +309,44 @@ interface NavbarProps {
   handleDisconnectWallet: () => void;
 }
 
+export interface RateFeesObj {
+  fastestFee: number;
+  halfHourFee: number;
+  hourFee: number;
+  economyFee: number;
+  minimumFee: number;
+}
+
 export default function Navbar({
   wallet,
   openWalletCallback,
   handleDisconnectWallet,
 }: NavbarProps) {
   const [openMenu, setOpenMenu] = useState(false);
+  const [rateFees, setRateFees] = useState<RateFeesObj>();
+  // const [fetchTimer, setFetchTimer] = useState<number>(0);
+  const rerunTimer = useRef(0);
+
+  useEffect(() => {
+    async function effectCode() {
+      console.log("Fetching now");
+      const rateFees = await getRateFees();
+      if (rateFees) {
+        setRateFees(rateFees);
+      }
+      console.log("Done Fetching");
+      rerunTimer.current = window.setTimeout(effectCode, 12000);
+    }
+
+    effectCode();
+
+    return () => {
+      if (rerunTimer.current) {
+        console.log("Disposing this");
+        clearTimeout(rerunTimer.current);
+      }
+    };
+  }, []);
 
   return (
     <nav className="">
@@ -365,7 +398,7 @@ export default function Navbar({
           }}
         >
           <div className="gas-fee">
-            <GasPopover />
+            <GasPopover halfHourFee={rateFees?.halfHourFee} />
           </div>
 
           {wallet.address.length > 0 ? (

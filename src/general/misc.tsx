@@ -8,6 +8,7 @@ import {
   signWizzWallet,
   signXverseWallet,
 } from "../components/connect-dialog/signWallets";
+import { RateFeesObj } from "../components/navbar";
 
 type SignAddressFn = (
   id: WalletID,
@@ -48,3 +49,21 @@ export const signAddress: SignAddressFn = async (id, address, publicKey) => {
 
   return await fn(address, publicKey);
 };
+
+export async function getRateFees() {
+  try {
+    const response = await fetch(
+      "https://mempool.space/api/v1/fees/recommended",
+      {
+        method: "get",
+      }
+    );
+    if (response.status === 200) {
+      return (await response.json()) as RateFeesObj;
+    } else {
+      console.log("An error occured: ", response.body);
+    }
+  } catch (error) {
+    console.log("An error occured while fetching fees", error);
+  }
+}
