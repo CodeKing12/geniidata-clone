@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 export default function Header({ wallet, openWalletCallback }: HeaderProps) {
-  const [openNFTModal, setOpenNFTModal] = useState(true);
+  const [openNFTModal, setOpenNFTModal] = useState(false);
 
   return (
     <section className="parent">
