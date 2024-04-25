@@ -40,7 +40,7 @@
   transform-origin: center top;
 }
 
-.dialog.closed {
+.connect-dialog .dialog.closed {
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, -54%) !important;
@@ -50,7 +50,7 @@
   transform: translateY(0);
 } */
 
-section.header {
+.connect-dialog section.header {
   text-align: center;
   font-size: 16px;
   font-weight: 500;
@@ -58,14 +58,14 @@ section.header {
   padding: 24px 24px 10px;
 }
 
-section.header .title {
+.connect-dialog section.header .title {
   line-height: 24px;
   font-size: 16px;
   color: var(--font-main-color);
   margin: 0;
 }
 
-section.body {
+.connect-dialog section.body {
   padding: 24px;
   max-height: 100%;
   flex: 1;
@@ -76,7 +76,7 @@ section.body {
   word-break: break-all;
 }
 
-.wallet-login .instruction {
+.connect-dialog .wallet-login .instruction {
   font-weight: 400;
   line-height: 22px;
   color: var(--font-main-color);
@@ -84,7 +84,7 @@ section.body {
   margin: 0;
 }
 
-.wallet-list .wallet-item {
+.connect-dialog .wallet-list .wallet-item {
   display: flex;
   width: 100%;
   height: 48px;
@@ -98,21 +98,21 @@ section.body {
   background: var(--bg-3);
 }
 
-.wallet-list .wallet-item:hover {
+.connect-dialog .wallet-list .wallet-item:hover {
   background-color: var(--bg-4);
 }
 
-.wallet-item .content {
+.connect-dialog .wallet-item .content {
   display: inline-flex;
   align-items: center;
 }
 
-.wallet-item .logo {
+.connect-dialog .wallet-item .logo {
   width: 32px;
   height: 32px;
 }
 
-.wallet-item .title {
+.connect-dialog .wallet-item .title {
   margin-left: 8px;
   font-size: 16px;
   font-weight: 500;
@@ -123,17 +123,17 @@ section.body {
   color: var(--white-a55);
 }
 
-section.footer {
+.connect-dialog section.footer {
   padding: 10px 24px 24px;
   text-align: right;
   box-sizing: border-box;
 }
 
-section.footer .close-btn {
+.connect-dialog section.footer .close-btn {
   background-color: #2c2c2c;
 }
 
-section.footer .close-btn:hover {
+.connect-dialog section.footer .close-btn:hover {
   background-color: var(--bg-4);
 }
 

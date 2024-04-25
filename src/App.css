@@ -235,3 +235,18 @@ main.wrapper {
   align-items: center;
   gap: 15px;
 }
+
+.continue {
+  display: flex;
+  justify-content: center;
+  margin-top: 140px;
+}
+
+.gn-btn {
+  background-color: #4a94f2;
+  width: fit-content;
+  color: white;
+  font-weight: 500;
+  padding: 15px 25px;
+  border-radius: 8px;
+}

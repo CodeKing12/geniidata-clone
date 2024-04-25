@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { WalletDetails } from "../../App";
 import HeaderBGImg from "../../assets/images/header-bg.png";
 import PointsBG from "../../assets/images/points-bg.png";
 import "./header.css";
+import NFTModal from "../nft-modal";
 
 interface HeaderProps {
   wallet: WalletDetails;
@@ -9,6 +11,8 @@ interface HeaderProps {
 }
 
 export default function Header({ wallet, openWalletCallback }: HeaderProps) {
+  const [openNFTModal, setOpenNFTModal] = useState(true);
+
   return (
     <section className="parent">
       <div className="container">
@@ -28,11 +32,25 @@ export default function Header({ wallet, openWalletCallback }: HeaderProps) {
               </div>
               <img className="points-bg" src={PointsBG} />
             </div>
+            <div className="continue">
+              <button
+                className="gn-btn cursor-pointer"
+                onClick={() => setOpenNFTModal(true)}
+              >
+                Test Account
+              </button>
+            </div>
           </div>
         ) : (
           <PageHeader openWalletCallback={openWalletCallback} />
         )}
       </div>
+      <NFTModal
+        open={openNFTModal}
+        closeModal={() => setOpenNFTModal(false)}
+        wallet={wallet}
+        feeRate={2}
+      />
     </section>
   );
 }

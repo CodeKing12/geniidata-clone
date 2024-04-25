@@ -1,6 +1,8 @@
 @import url(./assets/css/icons.css);
 @import url(./assets/css/element-icons.css);
 
+@tailwind utilities;
+
 html {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);

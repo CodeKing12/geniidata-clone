@@ -53,6 +53,7 @@ export const signUnisatWallet: SignWalletParams = async (
   let signature = "";
   try {
     signature = await window.unisat.signMessage(message);
+    console.log(signature, _address, _publicKey);
     return {
       type: "success",
       signature,
