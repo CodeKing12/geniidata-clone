@@ -205,7 +205,7 @@ function AddressPopover({ address, disconnectWallet }: AddressPopoverProps) {
         className="address-btn"
         ref={referenceElement}
         onClick={() => setVisible(!visible)}
-        onBlur={() => setVisible(false)}
+        // onBlur={() => setVisible(false)}
       >
         <div className="wrapper">
           <span>{address.slice(0, 4) + "..." + address.slice(-4)}</span>
